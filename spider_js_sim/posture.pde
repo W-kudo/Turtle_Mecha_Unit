@@ -28,6 +28,19 @@ void posture0() {
   println("posture1");
 }
 
+void posture20() {
+  int[] motorID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    setMotorID(motorID,0);
+  int[] angle = {
+      2048  ,  1024  ,  2048  ,  2048  ,  1024  ,  2048  ,  2048  ,  1024  ,  2048  ,  2048  ,  1024  ,  2048  ,  2048  ,  1024  ,  2048 ,  2048  ,  1024  ,  2048                       
+};
+
+
+  motionID = 0;
+  speed_setting();
+  motor_control(motorID, angle);
+  println("posture1");
+}
 void posture11() {
   int[] motorID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
     setMotorID(motorID,0);

@@ -176,25 +176,25 @@
    {
            kakuhen(60+0)  ,  kakuhen(-90+UDgear) ,   kakuhen(-UDgear)  ,   kakuhen(60+0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40) ,
            kakuhen(0-0)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,    kakuhen(0-0)  ,  kakuhen(-90+UDgear) ,   kakuhen(-UDgear)  , 
-          kakuhen(0-gear)  ,   kakuhen(-90+UDgear) ,   kakuhen(-UDgear)        ,  kakuhen(60-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,                          
+          kakuhen(0-gear)  ,   kakuhen(-90+UDgear) ,   kakuhen(-UDgear)        ,  kakuhen(0+0)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,                          
 
   },//右足を上げる
     {
            kakuhen(60+0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,   kakuhen(60+0)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,
            kakuhen(0-0)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,  kakuhen(0-0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,
-           kakuhen(0-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(60-gear) , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)                          
+           kakuhen(0-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(0+0) , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)                          
 
   },//右足を前におろす
     {
            kakuhen(60-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(60-gear)  ,  kakuhen(-90+UDgear) ,   kakuhen(-UDgear)  , 
            kakuhen(0-60)  ,   kakuhen(-90+UDgear) ,   kakuhen(-UDgear)  ,  kakuhen(0-60)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,
-           kakuhen(0-0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(60+0)  ,  kakuhen(-90+UDgear) ,   kakuhen(-UDgear)                          
+           kakuhen(0-0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(0+gear)  ,  kakuhen(-90+UDgear) ,   kakuhen(-UDgear)                          
 
   },//左脚を上げる,右足を後ろにする
     {
           kakuhen(60-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(60-gear)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,
           kakuhen(0-gear)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  , kakuhen(0-gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,
-          kakuhen(0-0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,  kakuhen(60+0)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)                          
+          kakuhen(0-0)  , kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)  ,  kakuhen(0+gear)  ,  kakuhen(-90+UDgear-40) ,   kakuhen(-UDgear+40)                          
     }//左足をおろす
   }; // posture3
   
