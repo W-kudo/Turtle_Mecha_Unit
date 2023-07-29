@@ -288,7 +288,7 @@ void HatRelease(float x, float y) {
       else posture11();
     } else {
       head=(head+1)%6;
-      posture0();
+      posture20();
       head=(head+5)%6;
     }
     if (hat_XY == 0) setMotion(MOTION_STOP);
