@@ -11,7 +11,6 @@ boolean ser = true;//実機（シリアルポート）をつなげている（tr
 int serialPortNum = 0;//接続されているシリアルポート番号に応じて変更すること
 boolean win = true;//Windows PC なら true，Mac なら falseに変更すること
 //boolean win = false;//Windows PC なら true，Mac なら falseに変更すること
-int headUD=0;
 Serial myPort;
 ControlIO control;
 ControlDevice gpad;
@@ -275,15 +274,7 @@ void textUpDate() {
   
   
   if(mode==1){
-  if(slider_LX<-80){
-    setMotion(MOTION_FORWARD);
-    walkrange=3;
-    move=1;
-  }
-  else if(slider_LX<-10){ setMotion(MOTION_STOP);
-  posture1();
-  move=0;
-  }
+
     if(slider_RX<-40&&slider_RY<-40){
    AtackLR=-1;
     }
@@ -295,7 +286,7 @@ void textUpDate() {
   
   
   
-  
+ 
   text("slider_RY L-R", 200, 160);
    if(mode!=3){
   if(slider_LY<-80){
@@ -315,28 +306,24 @@ void textUpDate() {
   move=0;
   }
    }
+   
+   
    if(mode==1){
-
-   if(slider_RY<-80){
- HeadLR-=5;
- 
-   onemotor_control(Head[0],HeadLR);
+   if(slider_RY<-90){
+    moveLR = -1;println(" moveLR=",moveLR);
   }
-   if(slider_RY>80){
-HeadLR+=5;
-  onemotor_control(Head[0],HeadLR);
+   else if(slider_RY>90){
+     moveLR = 1;println(" moveLR=",moveLR);
   }
+  else  moveLR = 0;println(" moveLR=",moveLR);
   
-   if(slider_RX<-80){
- HeadUD-=20;
- headUD-=20;
-   onemotor_control(Head[1],HeadUD);
+   if(slider_RX<-90&&moveLR ==0){
+     moveUD = 1;println(" moveUD=",moveUD);
   }
-   if(slider_RX>80){
-HeadUD+=20;
- headUD+=20;
-  onemotor_control(Head[1],HeadUD);
+   else if(slider_RX>90&&moveLR ==0){
+     moveUD = -1;println(" moveUD=",moveUD);
    }
+    else moveUD = 0;println(" moveUD=",moveUD);
 
 
    }
@@ -446,17 +433,24 @@ void torque_setting() {
   }
   delay(100);
 }
-
+void reboot() {
+    sendCommand("[z]\n");
+  delay(100);
+}
 void speed_setting() {
   String msg = "[v," + speed + "]\n";
   sendCommand(msg);
+}
+
+int UDchange(int UD,int angle){//反転したときモータに送る数値を反転させる
+  return (1-UD)*(2048-angle)+angle;
 }
 
 void motor_control(int motorID[], int angle[]) {
   if (torque == 1) {
     String msg = "[m";
     for (int i = 0; i < motorID.length; i++) {
-      msg += "," + motorID[i] + "," + angle[i];
+      msg += "," + motorID[i] + "," + UDchange(walkUPside,angle[i]);
     }
     msg += "]\n";
     sendCommand(msg);
@@ -466,7 +460,7 @@ void onemotor_control(int motorID,int angle){
     if (torque == 1) {
     String msg = "[s";
    
-      msg += "," + motorID + "," + angle;
+      msg += "," + motorID + "," + UDchange(walkUPside,angle);
     
     msg += "]\n";
     sendCommand(msg);
@@ -485,7 +479,7 @@ void motion_control(int motorID[], int intervalTime[], int angle[][]) {
         else pid = intervalTime.length - 1;
         val = alfa * (abs((float)(angle[sequence][i] - angle[pid][i])) * 5.0 * 60.0 * 1000.0) /
           ((float)intervalTime[sequence] * 1024.0 * 3.0 * 0.111 * 2.0);
-        msg += "," + motorID[i] + "," + (int)val;
+        msg += "," + motorID[i] + "," + UDchange(walkUPside,(int)val);
       }
       msg += "]\n";
       sendCommand(msg);

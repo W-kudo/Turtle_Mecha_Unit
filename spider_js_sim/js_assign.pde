@@ -5,29 +5,40 @@ int RightHeadUD=3072;
 int LeftHeadUD=3072;
 int mode3to2=0;
 int AtackLR=0;
-int HeadLR=1707;
-int TailLR=2389;
+int HeadLR=2048;
 int HeadUD=3072;
-int TailUD=2560;
+int NeckUD=1024;
+int TailUD=2048;
+int TailLR=2048;
+int TnecUD=2048;
+  int move=0;
   int gear=20;
   int UDgear=40;
-  int Gear=20;
-  int UDGear=40;
+   int moveLR=0;
+  int moveUD=0;
+void gearReset(){gear=20;UDgear=40;setAngle();} 
+void udlrReset(){ HeadLR=2048;HeadUD=3072;NeckUD=1024;
+                  TailUD=2048;TailLR=2048;TnecUD=2048;}
+                  
+void AllReset(){gearReset(); udlrReset();}
+
+
 void A_ButtonPress() {
+  
   button_A += 1;
   if (mode!=3) {
-    HeadUD=3072;
-   TailUD=2560;
+   AllReset();
     posture0();
-    delay(100);
-    if (walkUPside==1) posture1();
-    else  posture11();
-  } else if (mode==3) {
+ posture1();
+
+  }
+  else if (mode==3) {
     RightKick1();
     delay(100);
     postureChange3();
   }
 }
+
 
 void A_ButtonRelease() {
   button_A -= 1;
@@ -45,6 +56,7 @@ void B_ButtonPress() {
       speed_setting();
       posture0();
     }
+    AllReset();
   } else if (mode==3) {
     RightKick1();
     delay(1000);
@@ -60,7 +72,43 @@ void B_ButtonRelease() {
 
 void X_ButtonPress() {
   button_X += 1;
-  if (mode==3) {
+  if(mode==1){
+    if(button_LA==1){
+      if(moveUD!=0){
+        if(abs(TailUD)<kakuhen(90))
+        TailUD=TailUD+moveUD*kakuhen(30);
+        onemotor_control(Tail[0],TailUD);
+      }
+      else if(moveLR!=0){
+        if (abs(TailLR)<kakuhen(90))
+        TailLR=TailLR+moveLR*kakuhen(30);
+         onemotor_control(Tail[1],TailLR);
+      }
+      else  {
+        TnecUD=(TnecUD+1024)%3072+1024;
+         onemotor_control(Tail[2],TnecUD);
+      }
+      }
+   else if(button_LA==0){
+    if(moveUD!=0){
+      if (abs( HeadUD)<kakuhen(90))
+        HeadUD= HeadUD+moveUD*kakuhen(30);
+        onemotor_control( Head[0], HeadUD);
+      }
+      else if(moveLR!=0){
+        if(abs( HeadLR)<kakuhen(90))
+        HeadLR= HeadLR+moveLR*kakuhen(30);
+         onemotor_control( Head[1], HeadLR);
+      }
+      else  {
+        NeckUD=(NeckUD+1024)%3072+1024;
+         onemotor_control(Head[2],NeckUD);
+      }
+     }
+    }
+   
+  
+  else if (mode==3) {
 
     setMotion(MOTION_SHOOT);
   }
@@ -119,7 +167,7 @@ void Y_ButtonRelease() {
 
 void LA_ButtonPress() {
   button_LA += 1;
-  initial();
+ // initial();
 }
 
 void LA_ButtonRelease() {
@@ -142,12 +190,24 @@ void LB_ButtonPress() {
    if (speed < 20) speed = 20;
    speed_setting();*/
   if (mode!=3) {
+    if( button_LT==1){
+       if(UDgear>40)
+                   UDgear-=30;
+                   setAngle();
+                        }
+    else if( button_RT==1){
+      if(gear>20) 
+          gear-=20;
+          setAngle();
+        }
+   else{
     speed = 200;
     speed_setting();
     posture0();
     head++;
     if (head>5)head-=6;
     if (move==0)posture1();
+        }
   }
 }
 
@@ -161,12 +221,26 @@ void RB_ButtonPress() {
   /* speed = speed + 20;
    if (speed > 200)*/
   if (mode!=3) {
+    
+     if( button_LT==1){
+       if(UDgear<100)
+                   UDgear+=30;
+                   setAngle();
+                        }
+    else if( button_RT==1){
+      if(gear<60) 
+          gear+=20;
+          setAngle();
+        }
+   else{ 
     speed = 200;
     speed_setting();
     posture0();
     head--;
+   
     if (head<0)head+=6;
     if (move==0)posture1();
+    }
   }
   //if(mode==2)
 }
@@ -177,19 +251,9 @@ void RB_ButtonRelease() {
 }
 
 void LT_ButtonPress() {
-  if (mode==1) {
-   if( button_X==1){if(UDgear>40)
-   UDGear-=30;
- UDgear-=30;}
-   else if (gear>20) {
-     gear-=20;
-     Gear-=20;
-   }
-  }
 
   button_LT += 1;
 
-  // posture5();
 }
 
 void LT_ButtonRelease() {
@@ -198,14 +262,6 @@ void LT_ButtonRelease() {
 
 void RT_ButtonPress() {
   button_RT += 1;
-  if (mode!=3) {
-    if( button_X==1){if(UDgear<100)
-    UDGear+=30;
-  UDgear+=30;}
-    else if (gear<60) {gear+=20;
-    Gear+=20;
-    }
-  }
   if (button_LT == 1) {
     speed = 200;
     speed_setting();
@@ -232,6 +288,7 @@ void Start_ButtonPress() {
   if (torque == 1) torque = 0;
   else torque = 1;
   torque_setting();
+  reboot();
 }
 
 void Start_ButtonRelease() {
@@ -239,26 +296,31 @@ void Start_ButtonRelease() {
 }
 int LR=0;
 void HatPress(float x, float y) {
-  hat_XY = (int)hat[0].getValue();
-  move=1;
-  if (hat_XY == 2) {
-    if (mode==1) {
-      setMotion(MOTION_FORWARD);
-    } else if (mode==2) {
-      mode=1;
-      setMotion(MOTION_FORWARD);
-    }
-  } else if (hat_XY == 6) {
-    if (mode==1) {
-      setMotion(MOTION_BACK);
-    } else if (mode==2) {
-      mode=1;
+            hat_XY = (int)hat[0].getValue();
+            move=1;
+            if (hat_XY == 2) {
+                              if (mode==1) {
+                                  setMotion(MOTION_FORWARD);
+                              }
+                              else if (mode==2) {
+                                   mode=1;
+                                   AllReset();
+                                   setMotion(MOTION_FORWARD);
+                              }
+            } else if (hat_XY == 6) {
+                              if (mode==1) {
+                                
+                                          setMotion(MOTION_BACK);
+                                          
+                              } else if (mode==2) {
+                              mode=1;
+                               AllReset();
       setMotion(MOTION_BACK);
     }
   } else if (hat_XY == 8) {
     if (mode!=3) {
       if (mode==1){
-      mode=2;
+      mode=2;gearReset();
       gear=20;
       UDgear=40;
     }
@@ -268,7 +330,7 @@ void HatPress(float x, float y) {
   } else if (hat_XY == 4) {
     if (mode!=3) {
       if (mode==1){
-        mode=2;
+        mode=2;gearReset();
       gear=20;
       UDgear=40;
     }
@@ -284,12 +346,13 @@ void HatRelease(float x, float y) {
   move=0;
   if (mode!=3) {
     if (mode==1) {
-      if (walkUPside!=-1)posture1();
-      else posture11();
+      posture1();
+      
     } else {
       head=(head+1)%6;
+ 
       posture20();
-      head=(head+5)%6;
+           head=(head+5)%6;
     }
     if (hat_XY == 0) setMotion(MOTION_STOP);
   }
