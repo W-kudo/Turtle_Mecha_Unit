@@ -8,7 +8,7 @@ String motionName[]={"stop","forward","back","left","right","leftturn","righttur
 
 boolean sim = true;//KingSpiderのシミュレーションを表示する（true）か，表示しない（false）か
 boolean ser = true;//実機（シリアルポート）をつなげている（true）か，つなげていない（false）か
-int serialPortNum = 0;//接続されているシリアルポート番号に応じて変更すること
+int serialPortNum = 2;//接続されているシリアルポート番号に応じて変更すること
 boolean win = true;//Windows PC なら true，Mac なら falseに変更すること
 //boolean win = false;//Windows PC なら true，Mac なら falseに変更すること
 Serial myPort;
