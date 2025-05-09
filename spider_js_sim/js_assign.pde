@@ -27,10 +27,11 @@ void A_ButtonPress() {
   
   button_A += 1;
   if (mode==1) {
+   AllReset();
    posture0();
    posture1();
    onemotor_control(Tail[2],kakuhen(0));
-  AllReset();
+   AllReset();
   }
   else if (mode==2) {
    AllReset();
@@ -179,6 +180,8 @@ void Y_ButtonRelease() {
 void LA_ButtonPress() {
   button_LA += 1;
   if(mode==1){
+     onemotor_control(Tail[2],kakuhen(0));
+     AllReset();
     mode=4;
     speed=60;
     posture101();
@@ -384,7 +387,7 @@ void HatRelease(float x, float y) {
   else if(mode==3){
   }
   else if(mode==4){
-    //posture101();
+    posture101();
     if (hat_XY == 0) setMotion(MOTION_STOP);
   }
 }
