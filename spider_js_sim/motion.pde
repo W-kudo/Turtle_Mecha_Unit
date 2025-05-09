@@ -226,6 +226,7 @@ void setMotorID(int[] motorID,int vector){
     int walkrange=0;
     int walkUPside=1;
       int[] intervalTime = {300, 200, 300,200}; // Interval Time [ms] for each posture
+      int[] intervalTime_D = {400, 300, 400,300}; // Interval Time [ms] for each posture
 
 
   
@@ -235,7 +236,76 @@ void setMotorID(int[] motorID,int vector){
    {13,14,15     , 16,17,18,            1, 2, 3,       4,5,6,    7,8,9,          10,11,12},//右前
     { 4, 5, 6,         1, 2, 3,        10, 11, 12,     7, 8, 9,          16, 17, 18,         13, 14, 15},//後
    };
-  
+   int[][]Dinosaur_F_motion={
+        { //////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),  kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },     
+      
+      {///////////////////左足をあげる
+        kakuhen(  60),  kakuhen(   20),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -60),  kakuhen(   0),          kakuhen( -60),  kakuhen( -80),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(  50),  kakuhen( 0),          kakuhen(  20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    },
+    
+        { /////////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },  
+      {////////////////右足を上げる
+        kakuhen(  60),  kakuhen( -80),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -60),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(   90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   20),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen( -20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    }
+  };
+     int[][]Dinosaur_L_motion={
+        { //////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),  kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },     
+      
+      {///////////////////左足をあげる
+        kakuhen(  60),  kakuhen(   20),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -60),  kakuhen(   0),          kakuhen( -60),  kakuhen( -80),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(  50),  kakuhen( 0),          kakuhen(  20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    },
+            { //////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),  kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },     
+      
+      {///////////////////左足をあげる
+        kakuhen(  60),  kakuhen(   20),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -60),  kakuhen(   0),          kakuhen( -60),  kakuhen( -80),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(  50),  kakuhen( 0),          kakuhen(  20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    }
+  };
+     int[][]Dinosaur_R_motion={    
+        { /////////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },  
+      {////////////////右足を上げる
+        kakuhen(  60),  kakuhen( -80),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -60),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(   90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   20),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen( -20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    },
+            { /////////////////初期姿勢
+          kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -20),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(  90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾
+      },  
+      {////////////////右足を上げる
+        kakuhen(  60),  kakuhen( -80),  kakuhen( -90),          kakuhen( -90),  kakuhen(  -60),  kakuhen(   0),/////////右足////////////左手
+        kakuhen(   90),  kakuhen(  -20),  kakuhen(   0),          kakuhen( -60),  kakuhen(   20),  kakuhen( -90),/////////////右手///////左足
+        kakuhen(   0),   kakuhen(   50),  kakuhen( 0),          kakuhen( -20),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                  
+    }
+  };
   
   
   
@@ -244,9 +314,12 @@ void forward_motion_control() {
   setAngle();
   int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
   setMotorID(motorID,0);
-  
-motion_control(motorID, intervalTime, angle0);
-
+ if(mode==1){
+    motion_control(motorID, intervalTime, angle0);
+ }
+ else if(mode==4){
+    motion_control(motorID, intervalTime, Dinosaur_F_motion);
+ }
 
   if (sequence > intervalTime.length) {
     sequence = 0;
@@ -267,11 +340,18 @@ motion_control(motorID, intervalTime, angle0);
 }
 
 void left_motion_control() {
- int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
+ 
+ if(mode==1){
+    int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
               {7,8,9     , 10,11,12,            13, 14, 15,       16,17,18,    4,5,6,          1, 2, 3};
- setMotorID(motorID,0);  
-motion_control(motorID, intervalTime, LRangle);
-
+ setMotorID(motorID,0); 
+    motion_control(motorID, intervalTime, angle0);
+ }
+ else if(mode==4){
+     int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
+  setMotorID(motorID,0);
+    motion_control(motorID, intervalTime_D, Dinosaur_L_motion);
+ }
   if (sequence > intervalTime.length) {
     sequence = 0;
     stime = millis();
@@ -279,10 +359,18 @@ motion_control(motorID, intervalTime, LRangle);
 }
 
 void right_motion_control() {
-  int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
+  
+ if(mode==1){
+     int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
               {13,14,15     , 16,17,18,            1, 2, 3,       4,5,6,    7,8,9,          10,11,12};
-  setMotorID(motorID,3);  
- motion_control(motorID, intervalTime, LRangle);
+  setMotorID(motorID,3);
+    motion_control(motorID, intervalTime, angle0);
+ }
+ else if(mode==4){
+     int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
+  setMotorID(motorID,0);
+    motion_control(motorID, intervalTime_D, Dinosaur_R_motion);
+ }
 
   if (sequence > intervalTime.length) {
     sequence = 0;

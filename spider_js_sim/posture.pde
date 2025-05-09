@@ -58,6 +58,34 @@ void posture11() {
   motor_control(motorID, angle);
   println("posture1");
 }
+//恐竜モードの初期姿勢
+void posture101() {
+  int[] motorID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    setMotorID(motorID,0);
+  int[] angleposture1 = {
+    kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(   0),  kakuhen(   0),/////////右足////////////左手
+    kakuhen(  90),  kakuhen(   0),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+    kakuhen(   0),  kakuhen(   0),  kakuhen( -90),          kakuhen(   0),  kakuhen(  73),  kakuhen(  30) ///////////頭////////尻尾                  
+  };
+  motionID = 0;
+  speed_setting();
+  motor_control(motorID, angleposture1);
+  println("posture101");
+}
+//恐竜モードの歩行時の初期姿勢
+void posture102() {
+  int[] motorID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    setMotorID(motorID,0);
+  int[] angleposture1 = {
+    kakuhen(  60),  kakuhen(   0),  kakuhen( -90),          kakuhen( -90),  kakuhen(   0),  kakuhen(   0),/////////右足////////////左手
+    kakuhen(  90),  kakuhen(   0),  kakuhen(   0),          kakuhen( -60),  kakuhen(   0),  kakuhen( -90),/////////////右手///////左足
+    kakuhen(   0),  kakuhen(   -40),  kakuhen( -50),          kakuhen(   0),  kakuhen(  70),  kakuhen(  30) ///////////頭////////尻尾                 
+  };
+  motionID = 0;
+  speed_setting();
+  motor_control(motorID, angleposture1);
+  println("posture101");
+}
 
 void posture2() {
   int[] motorID = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};

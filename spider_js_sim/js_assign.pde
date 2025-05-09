@@ -26,16 +26,27 @@ void AllReset(){gearReset(); udlrReset();}
 void A_ButtonPress() {
   
   button_A += 1;
-  if (mode!=3) {
+  if (mode==1) {
+   posture0();
+   posture1();
+   onemotor_control(Tail[2],kakuhen(0));
+  AllReset();
+  }
+  else if (mode==2) {
    AllReset();
-    posture0();
- posture1();
+   posture0();
+   posture1();
 
   }
   else if (mode==3) {
     RightKick1();
     delay(100);
     postureChange3();
+  }
+  else if (mode==4) {
+    AllReset();
+    posture102();
+    posture101();
   }
 }
 
@@ -167,6 +178,16 @@ void Y_ButtonRelease() {
 
 void LA_ButtonPress() {
   button_LA += 1;
+  if(mode==1){
+    mode=4;
+    speed=60;
+    posture101();
+  }
+  else if(mode==4){
+    mode=1;
+    speed=60;
+    posture0();
+  }
  // initial();
 }
 
@@ -307,6 +328,11 @@ void HatPress(float x, float y) {
                                    AllReset();
                                    setMotion(MOTION_FORWARD);
                               }
+                              else if (mode==3) {
+                              }
+                              else if (mode==4) {
+                                setMotion(MOTION_FORWARD);
+                              }
             } else if (hat_XY == 6) {
                               if (mode==1) {
                                 
@@ -344,16 +370,21 @@ void HatRelease(float x, float y) {
 
   hat_XY = (int)hat[0].getValue();
   move=0;
-  if (mode!=3) {
-    if (mode==1) {
-      posture1();
-      
-    } else {
-      head=(head+1)%6;
+  if (mode==1) {
+    posture1();
+    if (hat_XY == 0) setMotion(MOTION_STOP);
+  }
+  else if(mode==2){
+    head=(head+1)%6;
  
-      posture20();
-           head=(head+5)%6;
-    }
+    posture20();
+    head=(head+5)%6;
+    if (hat_XY == 0) setMotion(MOTION_STOP);
+  }
+  else if(mode==3){
+  }
+  else if(mode==4){
+    //posture101();
     if (hat_XY == 0) setMotion(MOTION_STOP);
   }
 }
