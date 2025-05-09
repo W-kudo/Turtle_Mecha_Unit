@@ -20,7 +20,11 @@ void gearReset(){gear=20;UDgear=40;setAngle();}
 void udlrReset(){ HeadLR=2048;HeadUD=3072;NeckUD=1024;
                   TailUD=2048;TailLR=2048;TnecUD=2048;}
                   
-void AllReset(){gearReset(); udlrReset();}
+void AllReset(){
+  gearReset();
+  udlrReset();
+speed=400;
+}
 
 
 void A_ButtonPress() {
@@ -37,6 +41,7 @@ void A_ButtonPress() {
    AllReset();
    posture0();
    posture1();
+   mode=1;
 
   }
   else if (mode==3) {
@@ -336,37 +341,39 @@ void HatPress(float x, float y) {
                               else if (mode==4) {
                                 setMotion(MOTION_FORWARD);
                               }
-            } else if (hat_XY == 6) {
+            }
+            else if (hat_XY == 6) {
                               if (mode==1) {
                                 
                                           setMotion(MOTION_BACK);
                                           
-                              } else if (mode==2) {
-                              mode=1;
-                               AllReset();
-      setMotion(MOTION_BACK);
-    }
-  } else if (hat_XY == 8) {
-    if (mode!=3) {
-      if (mode==1){
-      mode=2;gearReset();
-      gear=20;
-      UDgear=40;
-    }
-      LR=1;
-      setMotion(MOTION_LEFT);
-    }
-  } else if (hat_XY == 4) {
-    if (mode!=3) {
-      if (mode==1){
-        mode=2;gearReset();
-      gear=20;
-      UDgear=40;
-    }
-      LR=-1;
-      setMotion(MOTION_RIGHT);
-    }
-  }
+                                      } else if (mode==2) {
+                                      mode=1;
+                                       AllReset();
+              setMotion(MOTION_BACK);
+            }
+          } 
+          else if (hat_XY == 8) {
+            if (mode!=3) {
+              if (mode==1){
+              mode=2;gearReset();
+              gear=20;
+              UDgear=40;
+            }
+              LR=1;
+              setMotion(MOTION_LEFT);
+            }
+          } else if (hat_XY == 4) {
+            if (mode!=3) {
+              if (mode==1){
+                mode=2;gearReset();
+              gear=20;
+              UDgear=40;
+            }
+              LR=-1;
+              setMotion(MOTION_RIGHT);
+            }
+          }
 }
 
 void HatRelease(float x, float y) {

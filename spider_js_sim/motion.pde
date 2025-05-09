@@ -314,7 +314,7 @@ void forward_motion_control() {
   setAngle();
   int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
   setMotorID(motorID,0);
- if(mode==1){
+ if(mode==1||mode==2){
     motion_control(motorID, intervalTime, angle0);
  }
  else if(mode==4){
@@ -341,11 +341,11 @@ motion_control(motorID, intervalTime, angle0);
 
 void left_motion_control() {
  
- if(mode==1){
+ if(mode==1||mode==2){
     int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
               {7,8,9     , 10,11,12,            13, 14, 15,       16,17,18,    4,5,6,          1, 2, 3};
  setMotorID(motorID,0); 
-    motion_control(motorID, intervalTime, angle0);
+    motion_control(motorID, intervalTime, LRangle);
  }
  else if(mode==4){
      int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
@@ -360,11 +360,11 @@ void left_motion_control() {
 
 void right_motion_control() {
   
- if(mode==1){
+ if(mode==1||mode==2){
      int[] motorID = //{1, 2, 3,      4, 5, 6,          7, 8, 9,          10, 11, 12,     13, 14, 15,          16, 17, 18};
               {13,14,15     , 16,17,18,            1, 2, 3,       4,5,6,    7,8,9,          10,11,12};
   setMotorID(motorID,3);
-    motion_control(motorID, intervalTime, angle0);
+    motion_control(motorID, intervalTime, LRangle);
  }
  else if(mode==4){
      int[] motorID ={1, 2, 3,     4, 5, 6,     7, 8, 9,         10, 11, 12,         13, 14, 15,           16, 17, 18};
